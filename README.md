@@ -25,13 +25,7 @@ Le site met en avant les voyages, séjours et accompagnements pour étudiants et
 📸 *Aperçu du site :*  
 ![Aperçu](./assets/screenshot-accueil.png)
 
-panafricaetudevoyage/
-│── index.html
-│── style.css
-│── script.js
-│── assets/
-│ ├── images...
-│ └── logo.png
+
 
 
 ---
@@ -46,6 +40,15 @@ panafricaetudevoyage/
 ## ⚠️ Note
 Ce dépôt contient les fichiers sources du site *Panafrica Étude & Voyage*.  
 Les identifiants et fichiers sensibles (ex: config serveur) ne sont pas inclus.
+
+
+panafricaetudevoyage/
+│── index.html
+│── style.css
+│── script.js
+│── assets/
+│ ├── images...
+│ └── logo.png
 
 
 
