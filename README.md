@@ -23,7 +23,7 @@ Le site met en avant les voyages, séjours et accompagnements pour étudiants et
 🔗 **Visiter le site :** [https://panafricaetudevoyage.site](https://panafricaetudevoyage.site)
 
 📸 *Aperçu du site :*  
-![Aperçu](./assets/screenshot-accueil.png)
+![Aperçu](vu1.png)
 
 
 
