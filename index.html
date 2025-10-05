@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panafrica Étude Voyage | De l'Afrique au Monde</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+        .gold-gradient {
+            background: linear-gradient(90deg, #D4AF37 0%, #F9D423 100%);
+        }
+        .blue-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        }
+        .flag-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .glow-on-hover {
+            transition: all 0.3s ease;
+        }
+        .glow-on-hover:hover {
+            box-shadow: 0 0 15px rgba(210, 180, 60, 0.8);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .cloud-animation {
+            animation: cloudMove 60s linear infinite;
+        }
+        @keyframes cloudMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 1000px 0; }
+        }
+        .plane-animation {
+            animation: planeFly 20s linear infinite;
+        }
+        @keyframes planeFly {
+            0% { transform: translateX(-100%) translateY(20px); }
+            100% { transform: translateX(100vw) translateY(-20px); }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Hero Section -->
+    <div id="hero" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-blue-900 opacity-20 z-0 cloud-animation" style="background-image: url('http://static.photos/travel/1200x630/1'); background-size: cover;"></div>
+        
+        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-blue-900/10 to-blue-900/30 z-1"></div>
+         <!-- Navbar avec logo animé -->
+<!-- Navbar -->
+<nav class="absolute top-0 left-0 w-full flex items-center justify-between px-6 py-4 z-20 bg-transparent">
+    <!-- Logo -->
+    <div class="flex items-center">
+        <img src="logo.png" 
+             alt="Logo Panafrica Étude Voyage" 
+             class="w-28 md:w-40 lg:w-48 animate-logo cursor-pointer">
+    </div>
+
+    <!-- Menu desktop -->
+    <ul class="hidden md:flex space-x-8 text-white font-semibold text-lg">
+        <li><a href="#hero" class="hover:text-red-400 transition-all duration-300 transform hover:scale-110">Accueil</a></li>
+        <li><a href="#service" class="hover:text-red-400 transition-all duration-300 transform hover:scale-110">Services</a></li>
+        <li><a href="#destinations" class="hover:text-red-400 transition-all duration-300 transform hover:scale-110">Destinations</a></li>
+        <li><a href="#contact" class="hover:text-red-400 transition-all duration-300 transform hover:scale-110">Contact</a></li>
+        <li><a href="#faq" class="hover:text-red-400 transition-all duration-300 transform hover:scale-110">FAQ</a></li>
+    </ul>
+
+    <!-- Hamburger Button mobile fima faté wone -->
+    <div class="md:hidden">
+        <button id="menu-btn" class="focus:outline-none">
+            <i data-feather="menu" class="w-8 h-8 text-white"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Menu bima faté wone -->
+    <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-blue-900 text-white flex flex-col space-y-4 p-6 md:hidden z-30 shadow-lg">
+        <a href="#hero" class="hover:text-red-400">Accueil</a>
+        <a href="#service" class="hover:text-red-400">Services</a>
+        <a href="#destinations" class="hover:text-red-400">Destinations</a>
+        <a href="#contact" class="hover:text-red-400">Contact</a>
+        <a href="#faq" class="hover:text-red-400">FAQ</a>
+    </div>
+</nav>
+
+<!-- Script bima faté wone  -->
+<script>
+const btn = document.getElementById('menu-btn');
+const menu = document.getElementById('mobile-menu');
+
+btn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+});
+</script>
+
+
+<!-- CSS Animations -->
+<style>
+/* Animation du logo */
+@keyframes float {
+    0%   { transform: translateY(0px) rotate(0deg); }
+    50%  { transform: translateY(-10px) rotate(3deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes glow {
+    0%   { filter: drop-shadow(0 0 5px #00d4ff) drop-shadow(0 0 10px #00d4ff); }
+    50%  { filter: drop-shadow(0 0 20px #ff0000) drop-shadow(0 0 40px #ff0000); }
+    100% { filter: drop-shadow(0 0 5px #00d4ff) drop-shadow(0 0 10px #00d4ff); }
+}
+
+/* Classe du logo animé */
+.animate-logo {
+    animation: float 4s ease-in-out infinite, glow 3s ease-in-out infinite;
+    transition: transform 0.3s ease-in-out;
+}
+
+.animate-logo:hover {
+    transform: scale(1.2) rotate(5deg);
+}
+</style>
+
+         class="mx-auto mb-6 w-32 md:w-40">
+       <div class="relative z-10 text-center px-4 md:px-0 max-w-md md:max-w-3xl mx-auto">
+
+            <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-6" data-aos="fade-down">
+    <span class="gold-gradient bg-clip-text text-transparent">Panafrica Étude Voyage</span>
+</h1>
+
+<p class="text-base sm:text-xl md:text-2xl text-white mb-8" data-aos="fade-down" data-aos-delay="100">
+    De l'Afrique au Monde, nous ouvrons vos portes de voyages !
+</p>
+
+            <button class="px-8 py-4 bg-red-600 text-white font-bold rounded-full glow-on-hover hover:bg-red-700 transition-all duration-300 transform hover:scale-105" data-aos="zoom-in" data-aos-delay="200">
+                Commencez votre voyage
+            </button>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10" data-aos="fade-up" data-aos-delay="300">
+            <i data-feather="chevron-down" class="text-white animate-bounce w-10 h-10"></i>
+        </div>
+        
+        <div class="absolute top-20 right-20 opacity-70 plane-animation z-5">
+            <i data-feather="send" class="text-white w-16 h-16 transform rotate-45"></i>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <section id="service" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16" data-aos="fade-down">
+                Nos <span class="gold-gradient bg-clip-text text-transparent">Services</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover transition-all duration-300" data-aos="zoom-in">
+                    <div class="w-16 h-16 blue-gradient rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i data-feather="clipboard" class="text-white w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-4">Procédure Voyage</h3>
+                    <p class="text-gray-600 text-center">Nous simplifions toutes les démarches pour votre voyage d'étude à l'étranger.</p>
+                </div>
+                
+                <!-- Service Card 2 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover transition-all duration-300" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="w-16 h-16 blue-gradient rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i data-feather="book-open" class="text-white w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-4">Admission</h3>
+                    <p class="text-gray-600 text-center">Accompagnement complet pour votre admission dans les meilleures institutions.</p>
+                </div>
+                
+                <!-- Service Card 3 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover transition-all duration-300" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="w-16 h-16 blue-gradient rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i data-feather="file-text" class="text-white w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-4">Assistance Visa</h3>
+                    <p class="text-gray-600 text-center">Expertise et suivi personnalisé pour l'obtention de votre visa étudiant.</p>
+                </div>
+                
+                <!-- Service Card 4 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover transition-all duration-300" data-aos="zoom-in">
+                    <div class="w-16 h-16 blue-gradient rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i data-feather="home" class="text-white w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-4">Réservation</h3>
+                    <p class="text-gray-600 text-center">Trouvez votre logement étudiant idéal avant même votre arrivée.</p>
+                </div>
+                
+                <!-- Service Card 5 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover transition-all duration-300" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="w-16 h-16 blue-gradient rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i data-feather="airplay" class="text-white w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-4">Billet d'avion</h3>
+                    <p class="text-gray-600 text-center">Meilleurs tarifs pour vos billets d'avion vers votre destination d'étude.</p>
+                </div>
+                
+                <!-- Service Card 6 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover transition-all duration-300" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="w-16 h-16 blue-gradient rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i data-feather="users" class="text-white w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-4">Accompagnement</h3>
+                    <p class="text-gray-600 text-center">Suivi continu avant, pendant et après votre installation à l'étranger.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+  <section id="destinations" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center text-gray-900 mb-16">
+            Nos <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-yellow-500">Destinations</span>
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="group relative overflow-hidden rounded-3xl shadow-xl h-96 cursor-pointer transform transition-all duration-500 hover:-translate-y-8 hover:scale-105 hover:shadow-2xl">
+                <img src="http://static.photos/travel/640x360/10" alt="Canada" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-6">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-lg">
+                        <img src="https://flagcdn.com/w80/ca.png" alt="Canada Flag" class="w-12 h-12 object-cover rounded-full">
+                    </div>
+                    <h3 class="text-3xl font-bold text-white mb-1">Canada</h3>
+                    <p class="text-gray-200 text-lg">Études de qualité dans un cadre exceptionnel</p>
+                </div>
+            </div>
+            
+            <div class="group relative overflow-hidden rounded-3xl shadow-xl h-96 cursor-pointer transform transition-all duration-500 hover:-translate-y-8 hover:scale-105 hover:shadow-2xl">
+                <img src="http://static.photos/travel/640x360/11" alt="France" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-6">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-lg">
+                        <img src="https://flagcdn.com/w80/fr.png" alt="France Flag" class="w-12 h-12 object-cover rounded-full">
+                    </div>
+                    <h3 class="text-3xl font-bold text-white mb-1">France</h3>
+                    <p class="text-gray-200 text-lg">Excellence académique au cœur de l'Europe</p>
+                </div>
+            </div>
+            
+            <div class="group relative overflow-hidden rounded-3xl shadow-xl h-96 cursor-pointer transform transition-all duration-500 hover:-translate-y-8 hover:scale-105 hover:shadow-2xl">
+                <img src="http://static.photos/travel/640x360/12" alt="Maroc" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-6">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-lg">
+                        <img src="https://flagcdn.com/w80/ma.png" alt="Maroc Flag" class="w-12 h-12 object-cover rounded-full">
+                    </div>
+                    <h3 class="text-3xl font-bold text-white mb-1">Maroc</h3>
+                    <p class="text-gray-200 text-lg">Culture riche et éducation de qualité</p>
+                </div>
+            </div>
+            
+            <div class="group relative overflow-hidden rounded-3xl shadow-xl h-96 cursor-pointer transform transition-all duration-500 hover:-translate-y-8 hover:scale-105 hover:shadow-2xl">
+                <img src="http://static.photos/travel/640x360/13" alt="Turquie" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-6">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-lg">
+                        <img src="https://flagcdn.com/w80/tr.png" alt="Turquie Flag" class="w-12 h-12 object-cover rounded-full">
+                    </div>
+                    <h3 class="text-3xl font-bold text-white mb-1">Turquie</h3>
+                    <p class="text-gray-200 text-lg">Pont entre l'Europe et l'Asie</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16" data-aos="fade-down">
+                Témoignages de <span class="gold-gradient bg-clip-text text-transparent">Nos Clients</span>
+            </h2>
+            
+            <div class="max-w-5xl mx-auto">
+                <div class="bg-white rounded-xl shadow-lg p-8 md:p-12" data-aos="zoom-in">
+                    <div class="flex flex-col md:flex-row items-center mb-8">
+                        <div class="w-24 h-24 rounded-full overflow-hidden mb-4 md:mb-0 md:mr-6">
+                            <img src="im.jpg" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">Salif Ciss</h3>
+                            <p class="text-gray-500">Étudiant au Canada</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">
+                        "Grâce à Panafrica Étude Voyage, j'ai pu réaliser mon rêve d'étudier à Montréal. Leur accompagnement a été exceptionnel du début à la fin. Je recommande vivement leurs services !"
+                    </p>
+                    <div class="flex mt-6">
+                        <i data-feather="star" class="text-yellow-400 w-5 h-5 mr-1"></i>
+                        <i data-feather="star" class="text-yellow-400 w-5 h-5 mr-1"></i>
+                        <i data-feather="star" class="text-yellow-400 w-5 h-5 mr-1"></i>
+                        <i data-feather="star" class="text-yellow-400 w-5 h-5 mr-1"></i>
+                        <i data-feather="star" class="text-yellow-400 w-5 h-5"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- FAQ Section Premium -->
+<section id="faq" class="relative py-24 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white overflow-hidden">
+  <!-- Shapes décoratives -->
+  <div class="absolute inset-0">
+    <span class="absolute w-96 h-96 bg-blue-600/20 rounded-full blur-3xl top-10 left-10 animate-pulse"></span>
+    <span class="absolute w-72 h-72 bg-purple-500/20 rounded-full blur-2xl bottom-20 right-20 animate-bounce"></span>
+  </div>
+
+  <div class="relative container mx-auto px-6 max-w-5xl">
+    <!-- Titre -->
+    <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-16">
+      Foire Aux <span class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-red-500">Questions</span>
+    </h2>
+
+    <!-- FAQ Accordéons -->
+    <div class="space-y-6">
+      <!-- Question 1 -->
+      <div class="bg-white/10 backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden transition-all">
+        <button class="w-full flex justify-between items-center px-6 py-5 text-left text-lg font-medium focus:outline-none group">
+          <span>Comment puis-je réserver un voyage ?</span>
+          <svg class="w-6 h-6 text-yellow-400 transform group-hover:rotate-90 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+        <div class="px-6 pb-5 text-gray-200 hidden">
+          Vous pouvez réserver directement en ligne via notre plateforme sécurisée, ou nous contacter par téléphone pour une assistance personnalisée.
+        </div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="bg-white/10 backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden transition-all">
+        <button class="w-full flex justify-between items-center px-6 py-5 text-left text-lg font-medium focus:outline-none group">
+          <span>Quels pays proposez-vous ?</span>
+          <svg class="w-6 h-6 text-yellow-400 transform group-hover:rotate-90 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+        <div class="px-6 pb-5 text-gray-200 hidden">
+          Nous couvrons une large gamme de destinations : Canada, France, Maroc, Turquie et bien d’autres selon vos besoins.
+        </div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="bg-white/10 backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden transition-all">
+        <button class="w-full flex justify-between items-center px-6 py-5 text-left text-lg font-medium focus:outline-none group">
+          <span>Offrez-vous une assistance pour les visas ?</span>
+          <svg class="w-6 h-6 text-yellow-400 transform group-hover:rotate-90 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+        <div class="px-6 pb-5 text-gray-200 hidden">
+          Oui, nous vous accompagnons tout au long de votre procédure de visa afin de maximiser vos chances d’obtention.
+        </div>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="bg-white/10 backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden transition-all">
+        <button class="w-full flex justify-between items-center px-6 py-5 text-left text-lg font-medium focus:outline-none group">
+          <span>Proposez-vous des facilités de paiement ?</span>
+          <svg class="w-6 h-6 text-yellow-400 transform group-hover:rotate-90 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+        <div class="px-6 pb-5 text-gray-200 hidden">
+          Nous proposons des plans flexibles pour que vous puissiez voyager sereinement sans pression financière.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Script pour l'accordéon -->
+<script>
+  document.querySelectorAll("section button").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const content = btn.nextElementSibling;
+      content.classList.toggle("hidden");
+    });
+  });
+</script>
+
+
+    <!-- Contact Section -->
+<!-- Contact Section Responsive -->
+<section id="contact" class="py-10 bg-gradient-to-b from-blue-900 via-blue-800 to-blue-900 text-white relative overflow-hidden">
+    <div class="container mx-auto px-6 relative z-10">
+        <div>
+            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-20 animate-fade-down">
+                Contactez-<span class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-red-500">Nous</span>
+            </h2>
+        </div>
+
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-start gap-10">
+            <!-- Contact Info -->
+            <div class="space-y-8 w-full md:w-1/2 animate-fade-right">
+                <div>
+                    <h3 class="text-3xl font-bold mb-6">Informations de contact</h3>
+
+                    <div class="flex items-start gap-4 mb-5">
+                        <i data-feather="map-pin" class="mt-1 text-blue-300"></i>
+                        <div>
+                            <h4 class="font-semibold">Adresse</h4>
+                            <p class="text-blue-200">Thiès, Angle serigne Fallou</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 mb-5">
+                        <i data-feather="phone" class="mt-1 text-blue-300"></i>
+                        <div>
+                            <h4 class="font-semibold">Téléphone</h4>
+                            <p class="text-blue-200">+221 78 875 35 08</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 mb-5">
+                        <i data-feather="mail" class="mt-1 text-blue-300"></i>
+                        <div>
+                            <h4 class="font-semibold">Email</h4>
+                            <p class="text-blue-200">panafricaetudevoyage@outlook.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social -->
+                <div>
+                    <h3 class="text-3xl font-bold mb-4">Suivez-nous</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-800 hover:bg-blue-700 transition-transform transform hover:scale-110 shadow-lg">
+                            <i data-feather="facebook" class="text-white"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-800 hover:bg-blue-700 transition-transform transform hover:scale-110 shadow-lg">
+                            <i data-feather="instagram" class="text-white"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-800 hover:bg-blue-700 transition-transform transform hover:scale-110 shadow-lg">
+                            <i data-feather="twitter" class="text-white"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-800 hover:bg-blue-700 transition-transform transform hover:scale-110 shadow-lg">
+                            <i data-feather="linkedin" class="text-white"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="w-full md:w-1/2 animate-fade-left">
+                <form class="bg-white rounded-3xl shadow-2xl px-6 sm:px-10 py-6 text-gray-800 backdrop-blur-md">
+                    <h3 class="text-3xl font-bold mb-8 text-blue-900">Envoyez-nous un message</h3>
+
+                    <div class="mb-3">
+                        <label for="name" class="block mb-2 text-gray-700 font-medium">Nom complet</label>
+                        <input type="text" id="name" class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all shadow-sm">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="block mb-2 text-gray-700 font-medium">Email</label>
+                        <input type="email" id="email" class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all shadow-sm">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="subject" class="block mb-2 text-gray-700 font-medium">Sujet</label>
+                        <input type="text" id="subject" class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all shadow-sm">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="message" class="block mb-2 text-gray-700 font-medium">Message</label>
+                        <textarea id="message" rows="4" class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all shadow-sm resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-red-500 to-red-600 text-white font-bold rounded-xl hover:from-red-600 hover:to-red-700 transition-all shadow-lg hover:shadow-2xl">
+                        Envoyer le message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Background animated shapes -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <span class="absolute w-72 h-72 bg-blue-800 rounded-full opacity-20 animate-ping top-10 left-10"></span>
+        <span class="absolute w-60 h-60 bg-blue-700 rounded-full opacity-30 animate-pulse bottom-20 right-20"></span>
+    </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-16">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+            <div>
+                <h3 class="text-2xl font-bold mb-4">Panafrica Étude Voyage</h3>
+                <p class="text-gray-400">De l'Afrique au Monde, nous ouvrons vos portes de voyages !</p>
+            </div>
+
+            <div>
+                <h3 class="text-2xl font-bold mb-4">Liens rapides</h3>
+                <ul class="space-y-3">
+                    <li><a href="#" class="hover:text-yellow-400 transition">Accueil</a></li>
+                    <li><a href="#" class="hover:text-yellow-400 transition">Services</a></li>
+                    <li><a href="#" class="hover:text-yellow-400 transition">Destinations</a></li>
+                    <li><a href="#" class="hover:text-yellow-400 transition">Contact</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-2xl font-bold mb-4">Destinations</h3>
+                <div class="flex space-x-3">
+                    <img src="https://flagcdn.com/w40/ca.png" alt="Canada" class="w-10 h-10 rounded-lg hover:scale-110 transition-transform cursor-pointer">
+                    <img src="https://flagcdn.com/w40/fr.png" alt="France" class="w-10 h-10 rounded-lg hover:scale-110 transition-transform cursor-pointer">
+                    <img src="https://flagcdn.com/w40/ma.png" alt="Maroc" class="w-10 h-10 rounded-lg hover:scale-110 transition-transform cursor-pointer">
+                    <img src="https://flagcdn.com/w40/tr.png" alt="Turquie" class="w-10 h-10 rounded-lg hover:scale-110 transition-transform cursor-pointer">
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-2xl font-bold mb-4">Newsletter</h3>
+                <p class="text-gray-400 mb-4">Abonnez-vous à notre newsletter pour les dernières actualités.</p>
+                <div class="flex rounded-xl overflow-hidden shadow-lg">
+                    <input type="email" placeholder="panafricaetudevoyage@outlook.com" class="px-4 py-3 w-full text-gray-900 focus:outline-none">
+                    <button class="bg-red-600 px-5 py-3 hover:bg-red-700 transition-all">
+                        <i data-feather="send" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-800 mt-12 pt-6 text-center text-gray-400">
+            <p>&copy; 2025 Panafrica Étude Voyage. Tous droits réservés.</p>
+        </div>
+    </div>
+</footer>
+
+
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        feather.replace();
+        
+        // Plane animation
+        gsap.to(".plane-animation", {
+            x: "100vw",
+            y: -50,
+            duration: 15,
+            repeat: -1,
+            ease: "none"
+        });
+        
+        // Initialize Vanta.js for hero section
+        VANTA.GLOBE({
+            el: "#hero",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x3b82f6,
+            backgroundColor: 0x111827,
+            size: 0.8
+        });
+    </script>
+</body>
+</html>
